@@ -1,20 +1,3 @@
-inoremap <c-x><c-k> <c-x><c-k>
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" Remove trailing whitespace on save for ruby files.
-autocmd FileType ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
-" autocmd BufWritePre *.js, *.erb, *.haml, *.css, *.scss, *.coffee :%s/\s\+$//e
-
-" Auto save file when lost focus
-" http://stackoverflow.com/questions/4637575/how-can-i-make-vim-autosave-files-when-it-loses-focus
-autocmd BufLeave,FocusLost * silent! wall
-
-" Auto exit insert mode when lost focus
-" http://stackoverflow.com/a/2969052/219065
-au FocusLost,TabLeave * call feedkeys("\<C-\>\<C-n>")
-
 " Disable beep sound
 set noeb vb t_vb=
 
@@ -248,11 +231,6 @@ nmap <silent> <leader>R :TestNearest<CR>
 " else
   " let g:VimuxHeight = 50
 " endif
-
-" vim-session: Auto save and reload session
-let g:session_autosave = 'yes'
-let g:session_autoload = 'yes'
-
 
 " NERDcommenter
 " Pad comment delimeters with spaces
