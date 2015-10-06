@@ -1,0 +1,358 @@
+inoremap <c-x><c-k> <c-x><c-k>
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" Remove trailing whitespace on save for ruby files.
+autocmd FileType ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
+" autocmd BufWritePre *.js, *.erb, *.haml, *.css, *.scss, *.coffee :%s/\s\+$//e
+
+" Auto save file when lost focus
+" http://stackoverflow.com/questions/4637575/how-can-i-make-vim-autosave-files-when-it-loses-focus
+autocmd BufLeave,FocusLost * silent! wall
+
+" Auto exit insert mode when lost focus
+" http://stackoverflow.com/a/2969052/219065
+au FocusLost,TabLeave * call feedkeys("\<C-\>\<C-n>")
+
+" Disable beep sound
+set noeb vb t_vb=
+
+" TODO: check
+set smartindent
+set autoindent
+
+" applies substitutions globally by default.
+set gdefault
+
+" color codeschool
+set guifont=Hack:h12
+set guioptions-=T " Removes top toolbar
+set guioptions-=r " Removes right hand scroll bar
+set go-=L " Removes left hand scroll bar
+
+set relativenumber
+set number
+
+" This will allow vim to load rvm correctly
+" http://rvm.io/integration/vim
+set shell=/bin/sh
+
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/coverage/*,*/log/*
+
+" Merge a tab into a split in the previous window
+function! MergeTabs()
+  if tabpagenr() == 1
+    return
+  endif
+  let bufferName = bufname("%")
+  if tabpagenr("$") == tabpagenr()
+    close!
+  else
+    close!
+    tabprev
+  endif
+  split
+  execute "buffer " . bufferName
+endfunction
+nmap <C-W>u :call MergeTabs()<CR>
+
+" Open 'gf' in vertical
+nnoremap <F8> :vertical wincmd f<CR>
+
+" use ,gf to go to file in a vertical split
+nnoremap <silent> ,gf :vertical botright wincmd f<CR>
+
+" Add new line without entering insert mode
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
+
+" Open help in new tab
+cabbrev help tab help
+cabbrev h tab h
+
+" Rename file
+function! RenameFile()
+let old_name = expand('%')
+let new_name = input('New file name: ', expand('%'), 'file')
+if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+endif
+endfunction
+map <leader>fr :call RenameFile()<cr>
+
+" More natural split opening
+set splitbelow
+set splitright
+
+set winwidth=84
+" We have to have a winheight bigger than we want to set winminheight. But if
+" we set winheight to be huge before winminheight, the winminheight set will
+" fail.
+" set winheight=5
+" set winminheight=5
+" set winheight=999
+
+" set textwidth=80
+set formatoptions+=t
+" set colorcolumn=80
+
+" Switch between the last two files
+nnoremap <leader><leader> <c-^>
+
+" stop search highlighting
+"nnoremap <leader><space> :noh<cr>
+
+" go to head, or tail. {{{
+inoremap <expr> <C-a> <SID>goto_head()
+func! s:goto_head() "{{{
+    let col = col('.')
+    let lnum = line('.')
+    let tilde_col = match(getline(lnum), '\S') + 1
+
+    if col > tilde_col
+        " go to ^ pos.
+        return "\<C-o>^"
+    else
+        " go to head.
+        return "\<Home>"
+    endif
+endfunc "}}}
+
+inoremap <expr> <C-e> <SID>goto_tail()
+func! s:goto_tail() "{{{
+    let col = col('.')
+    let lnum = line('.')
+    let tilde_col = match(getline(lnum), '\S') + 1
+
+    if col < tilde_col
+        " go to ^ pos.
+        return "\<C-o>^"
+    else
+        " go to tail.
+        return "\<End>"
+    endif
+endfunc "}}}
+" }}}
+
+" For a curly brace automatically inserts an indented line, useful for css.
+" http://stackoverflow.com/a/4961270/219065
+inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Utilities
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" fast expand current dir
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Configurations
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Ag
+map <leader>/ :Ag!<space>
+
+" CtrlP
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+map <leader>gv :CtrlPClearCache<cr>:CtrlP app/views<cr>
+map <leader>gf :CtrlPClearCache<cr>:CtrlP %%<cr>
+map <leader>gv :CtrlPClearCache<cr>:CtrlP app/views<cr>
+map <leader>gc :CtrlPClearCache<cr>:CtrlP app/controllers<cr>
+map <leader>gm :CtrlPClearCache<cr>:CtrlP app/models<cr>
+map <leader>gh :CtrlPClearCache<cr>:CtrlP app/helpers<cr>
+map <leader>gl :CtrlPClearCache<cr>:CtrlP lib<cr>
+map <leader>gs :CtrlPClearCache<cr>:CtrlP app/assets/stylesheets<cr>
+map <leader>gj :CtrlPClearCache<cr>:CtrlP app/assets/javascripts<cr>
+map <leader>ga :CtrlPClearCache<cr>:CtrlP app/controllers/api/v1<cr>
+map <leader>gF :CtrlPClearCache<cr>:CtrlP spec/features<cr>
+map <leader>gR :CtrlPClearCache<cr>:CtrlP spec/requests<cr>
+map <leader>gM :CtrlPClearCache<cr>:CtrlP spec/models<cr>
+map <leader>gA :CtrlPClearCache<cr>:CtrlP spec/requests/api<cr>
+
+map <leader>gr :topleft :split config/routes.rb<cr>
+map <leader>gg :topleft 100 :split Gemfile<cr>
+
+function! ShowRoutes()
+  " Requires 'scratch' plugin
+  :topleft 100 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! spring rake -s routes
+  " Size window to number of lines (1 plus rake output length)
+  :exec ":normal " . line("$") . "_ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+" map <leader>gR :call ShowRoutes()<cr>
+
+
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$
+            \ |(Desktop|Libary|Music|Movies|Pictures|cassettes|log|tmp)',
+            \ 'file': '\v\.(jpg|png|gif|psd|jpeg
+            \ |exe|so|o|dat|dmg|nib|xib|bat|egg|cer|DS_Store|pkg
+            \ |tar|bz|gz|zip|rar|iso|cdr|bz2
+            \ |mp3|mp4|mov|avi|flv|torrent|wmv
+            \ |pdf|epub|mobi|chm|doc|docx|lit|gdoc)$'
+            \ }
+
+map <Leader>rm :call CtrlPModels()
+"map <Leader>rm :CtrlPControllers
+"map <Leader>rm :CtrlPLibs
+"map <Leader>rm :CtrlPSpecs
+"map <Leader>rm :CtrlPViews
+
+" Set up vim-test
+nmap <silent> <leader>r :TestFile<CR>
+nmap <silent> <leader>R :TestNearest<CR>
+" let g:test#strategy = 'vimux'
+
+" Run specs in split screen
+" let g:VimuxOrientation = 'h'
+" if (&columns > 200)
+  " let g:VimuxHeight = 30
+" else
+  " let g:VimuxHeight = 50
+" endif
+
+" vim-session: Auto save and reload session
+let g:session_autosave = 'yes'
+let g:session_autoload = 'yes'
+
+
+" NERDcommenter
+" Pad comment delimeters with spaces
+let NERDSpaceDelims = 1
+
+" Emmet
+" Redefine trigger key
+let g:user_emmet_leader_key = '<c-y>'
+
+" let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Key bindings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <tab> %
+vnoremap <tab> %
+
+" Insert a hash rocket with <c-l>
+imap <c-l> <space>=><space>
+
+" Map escape key
+imap <c-c> <esc>
+imap jj <esc>
+
+" maps the spacebar to colon
+nmap <space> :
+
+" Move around splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+" Add pry to debug
+map <Leader>bp obinding.pry<esc>:w<cr>
+map <Leader>bP Obinding.pry<esc>:w<cr>
+
+" dl - Delete to last
+nnoremap dl d$
+" cl - Change to last
+nnoremap cl c$
+
+map <Leader>i mmgg=G`m
+
+" Strip trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" Strip all trailing space
+" nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" Disable SCSS linting (too slow and often wrong)
+let g:syntastic_scss_checkers=[]
+" indent private methods
+let g:ruby_indent_access_modifier_style="indent"
+
+" refresh changed content
+" set autoread
+au FocusGained,BufEnter * :silent! !
+au FocusLost,WinLeave * :silent! w
+
+" Fold tag
+nnoremap <leader>ft Vatzf
+
+" Reselect the text that waas just pasted
+nnoremap <leader>v V`]
+
+" Edit ~/.vimrc.after in vertical window
+" nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.vimrc.after<cr>
+
+" Map app/controllers/api/v1/*_controller.rb to spec/requests/api/*_spec.rb
+let g:rails_projections = {
+    \ "app/controllers/api/v1/*_controller.rb": {
+    \   "command": "api",
+    \   "alternate": "spec/requests/api/%s_spec.rb",
+    \   "test": [
+    \     "spec/requests/api/%s_spec.rb"
+    \   ]
+    \ },
+    \ "app/serializers/*_serializer.rb": {
+    \   "command": "serializer",
+    \   "affinity": "model",
+    \   "related": "app/models/%s.rb",
+    \   "template": "class %SSerializer < ActiveModel::Serializer\nend"
+    \ },
+    \ "app/controllers/concerns/*.rb": { "command": "concern" },
+    \ "spec/requests/api/*_spec.rb": {
+    \   "alternate": "app/controllers/api/v1/%s_controller.rb",
+    \ },
+    \ "spec/support/*.rb": { "command": "support" }}

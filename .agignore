@@ -1,0 +1,12 @@
+*.swp
+tmp
+log
+doc
+coverage
+cassettes
+public/assets
+jquery-*.js
+bootstrap*.css
+bootstrap*.js
+jquery.js
+spec/fixtures

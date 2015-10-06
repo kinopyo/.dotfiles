@@ -1,0 +1,54 @@
+[user]
+  name = kinopyo
+  email = fantasyday@gmail.com
+[core]
+  # editor = subl -w
+  pager = less -FRSX
+  whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  excludesfile = ~/.gitignore_global
+[color]
+  ui = auto
+  diff = auto
+  status = auto
+	branch = auto
+  interactive = auto
+  pager = true
+  grep = auto
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[alias]
+  co = checkout
+  cp = cherry-pick
+  p = pull
+  ps = push
+  s = pull origin master
+  r = reset
+  rhd = reset HEAD
+  rh = reset --hard
+  rs = reset --soft
+  d = diff
+  ci = commit
+  cl = clone
+  rb = rebase
+  br = branch
+  sl = stash list
+  sa = stash apply
+  ss = stash save
+  w = whatchanged
+  mine = log --author qihuan
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+[merge]
+  tool = opendiff
+[push]
+  default = current
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true

@@ -1,0 +1,6 @@
+*.sublime-workspace
+*.sublime-project
+.netrwhist
+.DS_Store
+.pt
+tmux.sh
