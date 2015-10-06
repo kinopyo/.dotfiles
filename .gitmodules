@@ -1,0 +1,3 @@
+[submodule ".janus/ag.vim"]
+	path = .janus/ag.vim
+	url = https://github.com/rking/ag.vim.git
