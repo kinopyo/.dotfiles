@@ -213,12 +213,6 @@ let g:ctrlp_custom_ignore = {
             \ |pdf|epub|mobi|chm|doc|docx|lit|gdoc)$'
             \ }
 
-map <Leader>rm :call CtrlPModels()
-"map <Leader>rm :CtrlPControllers
-"map <Leader>rm :CtrlPLibs
-"map <Leader>rm :CtrlPSpecs
-"map <Leader>rm :CtrlPViews
-
 " Set up vim-test
 nmap <silent> <leader>r :TestFile<CR>
 nmap <silent> <leader>R :TestNearest<CR>
