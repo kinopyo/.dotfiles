@@ -291,9 +291,6 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-" Strip all trailing space
-" nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
 " Disable SCSS linting (too slow and often wrong)
 let g:syntastic_scss_checkers=[]
 " indent private methods
