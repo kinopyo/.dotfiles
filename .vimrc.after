@@ -273,6 +273,14 @@ nnoremap cl c$
 
 map <Leader>i mmgg=G`m
 
+" Copy and paste to/from system clipboard
+vnoremap <C-c> "+y
+
+" Use ctrl + s to save
+noremap <silent> <C-S>          :update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR><Esc>
+inoremap <silent> <C-S>         <C-O>:update<CR><Esc>
+
 " Strip trailing whitespace
 function! <SID>StripTrailingWhitespaces()
   " Preparation: save last search, and cursor position.
