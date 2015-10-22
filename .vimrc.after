@@ -8,11 +8,13 @@ set autoindent
 " applies substitutions globally by default.
 set gdefault
 
-" color codeschool
-set guifont=Hack:h12
-set guioptions-=T " Removes top toolbar
-set guioptions-=r " Removes right hand scroll bar
-set go-=L " Removes left hand scroll bar
+filetype plugin indent on
+syntax on
+set encoding=utf-8
+
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
 
 set relativenumber
 set number
