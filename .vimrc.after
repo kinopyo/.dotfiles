@@ -230,7 +230,7 @@ nmap <silent> <leader>R :TestNearest<CR>
 
 " NERDcommenter
 " Pad comment delimeters with spaces
-let NERDSpaceDelims = 1
+ let NERDSpaceDelims = 1
 
 " Emmet
 " Redefine trigger key
