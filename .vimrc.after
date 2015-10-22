@@ -251,7 +251,7 @@ vnoremap <tab> %
 imap <c-l> <space>=><space>
 
 " Map escape key
-imap jk <esc>
+imap jj <esc>
 
 " maps the spacebar to colon
 nmap <space> :
