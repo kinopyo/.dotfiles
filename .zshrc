@@ -97,9 +97,6 @@ alias hrc="heroku run rails console"
 alias hpush="git push heroku master"
 alias hrdm="heroku run rake db:migrate"
 
-# iA Writer
-alias ia="open -a \"iA Writer\" "
-
 # https://github.com/rupa/z, for fast navigation
 . ~/bin/z.sh
 
