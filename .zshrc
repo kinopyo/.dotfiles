@@ -57,6 +57,11 @@ alias grs="git reset --soft"
 alias grs1="git reset --soft HEAD~1; git reset"
 alias gr="git reset"
 alias gch="git log --pretty=format:'%h' -n 1 | pbcopy"
+alias gbr="git for-each-ref refs/heads/ \
+                 --count=10 \
+                 --sort=-committerdate \
+                 --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset),%(authorname),(%(color:green)%(committerdate:relative)%(color:reset))' | \
+                 column -t -s ','"
 # dependent on https://github.com/mooz/percol
 alias gbi="git branch | percol | xargs git checkout"
 alias gai="git status -sb | percol | awk '{ print $2 }' | xargs git add"
@@ -76,20 +81,18 @@ alias vc="mvim ~/.vimrc.after"
 
 # rails
 # spring command
-alias src="spring rails c"
 alias ss="spring stop"
 alias rc!="spring stop; rails c"
 alias rs!="spring stop; rails s"
-alias srs="spring rspec"
-alias srdm="spring rake db:migrate"
-alias srdr="spring rake db:rollback"
-alias srdrt="RAILS_ENV=test spring rake db:rollback"
-alias srgm="spring rails g migration"
+alias rdm="rake db:migrate"
+alias rdr="rake db:rollback"
+alias rdrt="RAILS_ENV=test rake db:rollback"
+alias rgm="spring rails g migration"
 
 alias bx="bundle exec"
-alias rake="noglob rake"
+# alias rake="noglob rake"
+alias rspec="bin/rspec"
 alias rdmt="RAILS_ENV=test rake db:migrate"
-alias srdmt="RAILS_ENV=test spring rake db:migrate"
 
 # heroku
 alias hlog="heroku logs --tail"
