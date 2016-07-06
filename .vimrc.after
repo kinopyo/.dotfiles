@@ -16,13 +16,20 @@ let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
 
-set relativenumber
+" Scoll with relativenumber on could be slow, use lazyredraw to improve the performance
+" set relativenumber
+" set lazyredraw
 set number
+
+" Toggle relative line numbers and cursorline; useful for long line files
+function! LongLineToggle()
+  set relativenumber!
+endfunction
+map <Leader>ll :call LongLineToggle()<cr>
 
 " This will allow vim to load rvm correctly
 " http://rvm.io/integration/vim
 set shell=/bin/sh
-
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/coverage/*,*/log/*
 
@@ -50,8 +57,8 @@ nnoremap <F8> :vertical wincmd f<CR>
 nnoremap <silent> ,gf :vertical botright wincmd f<CR>
 
 " Add new line without entering insert mode
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
+"nmap <S-Enter> O<Esc>
+"nmap <CR> o<Esc>
 
 
 " Open help in new tab
@@ -88,7 +95,6 @@ set formatoptions+=t
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
-
 " stop search highlighting
 "nnoremap <leader><space> :noh<cr>
 
@@ -127,6 +133,7 @@ endfunc "}}}
 " For a curly brace automatically inserts an indented line, useful for css.
 " http://stackoverflow.com/a/4961270/219065
 inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utilities
@@ -222,6 +229,7 @@ nmap <silent> <leader>R :TestNearest<CR>
 let g:test#strategy = 'vimux'
 
 " Run specs in split screen
+let g:vroom_use_vimux = 1
 let g:VimuxOrientation = 'h'
 if (&columns > 200)
   let g:VimuxHeight = 30
@@ -272,15 +280,11 @@ nnoremap dl d$
 " cl - Change to last
 nnoremap cl c$
 
+" indent all files and get back to the previous line
 map <Leader>i mmgg=G`m
 
 " Copy and paste to/from system clipboard
 vnoremap <C-c> "+y
-
-" Use ctrl + s to save
-noremap <silent> <C-S>          :update<CR>
-vnoremap <silent> <C-S>         <C-C>:update<CR><Esc>
-inoremap <silent> <C-S>         <C-O>:update<CR><Esc>
 
 " Strip trailing whitespace
 function! <SID>StripTrailingWhitespaces()
@@ -306,14 +310,8 @@ let g:ruby_indent_access_modifier_style="indent"
 au FocusGained,BufEnter * :silent! !
 au FocusLost,WinLeave * :silent! w
 
-" Fold tag
-nnoremap <leader>ft Vatzf
-
 " Reselect the text that waas just pasted
 nnoremap <leader>v V`]
-
-" Edit ~/.vimrc.after in vertical window
-" nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.vimrc.after<cr>
 
 " Map app/controllers/api/v1/*_controller.rb to spec/requests/api/*_spec.rb
 let g:rails_projections = {
