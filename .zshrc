@@ -120,7 +120,7 @@ for f (~/.zsh/percol-utilities/*) source "${f}"
 # }
 
 # direnv hook
-eval "$(direnv hook $0)"
+# eval "$(direnv hook $0)"
 
 # rbenv
 eval "$(rbenv init -)"
