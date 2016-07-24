@@ -25,3 +25,12 @@
 [submodule ".janus/vim-surround"]
 	path = .janus/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule ".janus/vim-autoswap"]
+	path = .janus/vim-autoswap
+	url = https://github.com/gioele/vim-autoswap.git
+[submodule ".janus/vim-misc"]
+	path = .janus/vim-misc
+	url = https://github.com/xolox/vim-misc.git
+[submodule ".janus/vim-test"]
+	path = .janus/vim-test
+	url = https://github.com/janko-m/vim-test.git
