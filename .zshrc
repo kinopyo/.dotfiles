@@ -41,7 +41,7 @@ plugins=(git rails)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/qihuan-piao/bin
+export PATH=/usr/local/heroku/bin:/Users/kinopyo/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/bin
 
 export EDITOR='vim'
 export USE_BUNDLER=1
