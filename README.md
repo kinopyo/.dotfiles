@@ -6,3 +6,9 @@ cd ~
 git clone https://github.com/kinopyo/.dotfiles.git
 .dotfiles/setup.sh
 ```
+
+Misc
+
+```
+brew install ag
+```
