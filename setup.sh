@@ -1,6 +1,3 @@
-cd
-git clone git@github.com:kinopyo/.dotfiles.git
-
 ln -sf .dotfiles/.agignore .agignore
 ln -sf .dotfiles/.gitconfig .gitconfig
 ln -sf .dotfiles/.gitignore_global .gitignore_global
