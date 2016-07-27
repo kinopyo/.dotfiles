@@ -34,3 +34,6 @@
 [submodule ".janus/vim-test"]
 	path = .janus/vim-test
 	url = https://github.com/janko-m/vim-test.git
+[submodule ".janus/tmux-yank"]
+	path = .janus/tmux-yank
+	url = https://github.com/tmux-plugins/tmux-yank
