@@ -5,3 +5,4 @@
 .pt
 tmux.sh
 doc/tags
+.env
