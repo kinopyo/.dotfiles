@@ -2,11 +2,14 @@
 tmp
 log
 doc
+docs
 coverage
 cassettes
-public/assets
+data
+public
 jquery-*.js
 bootstrap*.css
 bootstrap*.js
 jquery.js
 spec/fixtures
+/vendor
