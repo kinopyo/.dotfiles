@@ -10,8 +10,8 @@ ln -sf .dotfiles/.zshrc .zshrc
 
 ln -sf .dotfiles/bin bin
 mkdir -p .zsh/percol-utilities
-ln -sf .dotfiles/.zsh/percol-utilities/git-recent-branches.zsh .zsh/percol-utilities/git-recent-branches.zsh
-ln -sf .dotfiles/.zsh/percol-utilities/select-history.zsh .zsh/percol-utilities/select-history.zsh
+cp .dotfiles/.zsh/percol-utilities/git-recent-branches.zsh .zsh/percol-utilities
+cp .dotfiles/.zsh/percol-utilities/select-history.zsh .zsh/percol-utilities
 
 ln -sf .dotfiles/.janus .janus
 
