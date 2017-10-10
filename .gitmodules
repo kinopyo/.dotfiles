@@ -37,3 +37,6 @@
 [submodule ".janus/tmux-yank"]
 	path = .janus/tmux-yank
 	url = https://github.com/tmux-plugins/tmux-yank
+[submodule "vim-auto-save"]
+	path = vim-auto-save
+	url = git@github.com:vim-scripts/vim-auto-save.git
