@@ -15,5 +15,6 @@ ln -sf .dotfiles/.zsh/percol-utilities/select-history.zsh .zsh/percol-utilities/
 
 ln -sf .dotfiles/.janus .janus
 
+cd .dotfiles
 git submodule init
 git submodule update
