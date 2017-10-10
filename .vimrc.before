@@ -2,7 +2,11 @@ let mapleader = ","
 
 " Using vim-test instead
 call janus#disable_plugin('vroom')
+call janus#disable_plugin('gundo')
+call janus#disable_plugin('vim-gitgutter')
 
-call janus#disable_plugin('vim-snippets', 'snippets shipped with this plugin are not my cup of tea.')
+" call janus#disable_plugin('vim-snippets', 'snippets shipped with this plugin are not my cup of tea.')
 call janus#disable_plugin('vim-snipmate')
+call janus#disable_plugin('syntastic', 'slow down everything')
+" call janus#disable_plugin('fugitive', 'not used that often?')
 " call janus#disable_plugin('supertab')

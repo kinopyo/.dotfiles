@@ -6,3 +6,6 @@
 tmux.sh
 doc/tags
 .env
+tags
+.trello_flow
+_local_dev.rb

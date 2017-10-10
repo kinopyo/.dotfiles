@@ -1,6 +1,8 @@
 " Disable beep sound
 set noeb vb t_vb=
 
+set clipboard=unnamed
+
 " TODO: check
 set smartindent
 set autoindent
@@ -91,7 +93,7 @@ set winwidth=84
 
 " set textwidth=80
 set formatoptions+=t
-" set colorcolumn=80
+set colorcolumn=100
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
@@ -158,6 +160,9 @@ endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
+" Resize splits when the window is resized
+autocmd VimResized * exe "normal! \<c-w>="
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utilities
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -185,6 +190,9 @@ augroup END
 " Ag
 map <leader>/ :Ag!<space>
 
+" Ignore .local_repo folder
+let g:rails_ctags_arguments = "--languages=ruby --exclude=.local_repo"
+
 " CtrlP
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -195,23 +203,25 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  " let g:ctrlp_use_caching = 0
 endif
 
-map <leader>gv :CtrlPClearCache<cr>:CtrlP app/views<cr>
-map <leader>gf :CtrlPClearCache<cr>:CtrlP %%<cr>
-map <leader>gv :CtrlPClearCache<cr>:CtrlP app/views<cr>
-map <leader>gc :CtrlPClearCache<cr>:CtrlP app/controllers<cr>
-map <leader>gm :CtrlPClearCache<cr>:CtrlP app/models<cr>
-map <leader>gh :CtrlPClearCache<cr>:CtrlP app/helpers<cr>
-map <leader>gl :CtrlPClearCache<cr>:CtrlP lib<cr>
-map <leader>gs :CtrlPClearCache<cr>:CtrlP app/assets/stylesheets<cr>
-map <leader>gj :CtrlPClearCache<cr>:CtrlP app/assets/javascripts<cr>
-map <leader>ga :CtrlPClearCache<cr>:CtrlP app/controllers/api/v1<cr>
-map <leader>gF :CtrlPClearCache<cr>:CtrlP spec/features<cr>
-map <leader>gR :CtrlPClearCache<cr>:CtrlP spec/requests<cr>
-map <leader>gM :CtrlPClearCache<cr>:CtrlP spec/models<cr>
-map <leader>gA :CtrlPClearCache<cr>:CtrlP spec/requests/api<cr>
+map <leader>gf :CtrlP %%<cr>
+map <leader>gv :CtrlP app/views<cr>
+map <leader>gc :CtrlP app/controllers<cr>
+map <leader>gm :CtrlP app/models<cr>
+map <leader>gh :CtrlP app/helpers<cr>
+map <leader>gz :CtrlP app/serializers<cr>
+map <leader>ge :CtrlP app/services<cr>
+map <leader>gl :CtrlP lib<cr>
+map <leader>gs :CtrlP app/assets/stylesheets<cr>
+map <leader>gj :CtrlP app/assets/javascripts<cr>
+map <leader>ga :CtrlP app/controllers/api<cr>
+map <leader>gF :CtrlP spec/features<cr>
+map <leader>gR :CtrlP spec/requests<cr>
+map <leader>gM :CtrlP spec/models<cr>
+map <leader>gA :CtrlP spec/requests/api<cr>
+map <leader>gi :CtrlP lib/global_admin<cr>
 
 map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
@@ -252,7 +262,7 @@ nmap <silent> <leader>R :TestNearest<CR>
 let g:test#strategy = 'vimux'
 
 " Run specs in split screen
-let g:vroom_use_vimux = 1
+" let g:vroom_use_vimux = 1
 let g:VimuxOrientation = 'h'
 if (&columns > 200)
   let g:VimuxHeight = 30
@@ -268,7 +278,10 @@ endif
 " Redefine trigger key
 let g:user_emmet_leader_key = '<c-y>'
 
-" let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
+" Open current file in NERDTree
+map <leader>m :NERDTreeFind<CR>
+
+" let g:ycm_key_lishttps://global.g.cookpad.com/pages/Infrastructure/MigrationGuidelinet_select_completion   = ['<C-n>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 
@@ -321,7 +334,8 @@ function! <SID>StripTrailingWhitespaces()
   let @/=_s
   call cursor(l, c)
 endfunction
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+map <Leader>w :call <SID>StripTrailingWhitespaces()<cr>
+" autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " Disable SCSS linting (too slow and often wrong)
 let g:syntastic_scss_checkers=[]
@@ -332,6 +346,10 @@ let g:ruby_indent_access_modifier_style="indent"
 " set autoread
 au FocusGained,BufEnter * :silent! !
 au FocusLost,WinLeave * :silent! w
+
+" Auto save
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_silent = 1  " do not display the auto-save notification
 
 " Reselect the text that waas just pasted
 nnoremap <leader>v V`]

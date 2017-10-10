@@ -87,11 +87,11 @@ alias rs!="spring stop; rails s"
 alias rdm="rake db:migrate"
 alias rdr="rake db:rollback"
 alias rdrt="RAILS_ENV=test rake db:rollback"
-alias rgm="spring rails g migration"
+alias rgm="bin/rails g migration"
 
 alias bx="bundle exec"
 # alias rake="noglob rake"
-alias rspec="bin/rspec"
+# alias rspec="bin/rspec"
 alias rdmt="RAILS_ENV=test rake db:migrate"
 
 # heroku
