@@ -40,3 +40,9 @@
 [submodule "vim-auto-save"]
 	path = vim-auto-save
 	url = git@github.com:vim-scripts/vim-auto-save.git
+[submodule "/Users/qihuan-piao/.dotfiles/.janus/plugin"]
+	path = /Users/qihuan-piao/.dotfiles/.janus/plugin
+	url = git@github.com:tpope/vim-rhubarb.git
+[submodule ".janus/vim-rhubarb"]
+	path = .janus/vim-rhubarb
+	url = git@github.com:tpope/vim-rhubarb.git
