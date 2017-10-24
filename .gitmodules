@@ -46,3 +46,6 @@
 [submodule ".janus/vim-rhubarb"]
 	path = .janus/vim-rhubarb
 	url = git@github.com:tpope/vim-rhubarb.git
+[submodule ".janus/vim-bracketed-paste"]
+	path = .janus/vim-bracketed-paste
+	url = git@github.com:ConradIrwin/vim-bracketed-paste.git
