@@ -188,7 +188,7 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Ag
-map <leader>/ :Ag!<space>
+map <leader>/ :Ag! --nobreak<space>
 
 " Ignore .local_repo folder
 let g:rails_ctags_arguments = "--languages=ruby --exclude=.local_repo"
