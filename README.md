@@ -23,13 +23,13 @@ git clone https://github.com/kinopyo/.dotfiles.git
 When adding a new vim plugin,
 
 ```
-cd ~/.dotfiles
-git submodule add https://github.com/repo/plugin ~/.dotfiles/.janus/plugin
+cd ~/.dotfiles/.janus
+git submodule add https://github.com/repo/plugin
 ```
 
 then in other machine,
 
-``
+```
 cd ~/.dotfiles
 git pull
 git submodule init
