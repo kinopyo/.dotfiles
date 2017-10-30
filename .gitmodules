@@ -46,3 +46,6 @@
 [submodule ".janus/vim-rhubarb"]
 	path = .janus/vim-rhubarb
 	url = git@github.com:tpope/vim-rhubarb.git
+[submodule ".janus/vim-yaml-helper"]
+	path = .janus/vim-yaml-helper
+	url = git@github.com:lmeijvogel/vim-yaml-helper.git
