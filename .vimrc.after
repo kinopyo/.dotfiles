@@ -138,27 +138,27 @@ inoremap {<CR> {<CR>}<Esc>O<BS><Tab>
 
 " Automatically set paste mode in Vim when pasting in insert mode
 " https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
-function! WrapForTmux(s)
-  if !exists('$TMUX')
-    return a:s
-  endif
+" function! WrapForTmux(s)
+  " if !exists('$TMUX')
+    " return a:s
+  " endif
 
-  let tmux_start = "\<Esc>Ptmux;"
-  let tmux_end = "\<Esc>\\"
+  " let tmux_start = "\<Esc>Ptmux;"
+  " let tmux_end = "\<Esc>\\"
 
-  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
-endfunction
+  " return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+" endfunction
 
-let &t_SI .= WrapForTmux("\<Esc>[?2004h")
-let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+" let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+" let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 
-function! XTermPasteBegin()
-  set pastetoggle=<Esc>[201~
-  set paste
-  return ""
-endfunction
+" function! XTermPasteBegin()
+  " set pastetoggle=<Esc>[201~
+  " set paste
+  " return ""
+" endfunction
 
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+" inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 " Resize splits when the window is resized
 autocmd VimResized * exe "normal! \<c-w>="
@@ -206,22 +206,39 @@ if executable('ag')
   " let g:ctrlp_use_caching = 0
 endif
 
-map <leader>gf :CtrlP %%<cr>
-map <leader>gv :CtrlP app/views<cr>
-map <leader>gc :CtrlP app/controllers<cr>
-map <leader>gm :CtrlP app/models<cr>
-map <leader>gh :CtrlP app/helpers<cr>
-map <leader>gz :CtrlP app/serializers<cr>
-map <leader>ge :CtrlP app/services<cr>
-map <leader>gl :CtrlP lib<cr>
-map <leader>gs :CtrlP app/assets/stylesheets<cr>
-map <leader>gj :CtrlP app/assets/javascripts<cr>
-map <leader>ga :CtrlP app/controllers/api<cr>
-map <leader>gF :CtrlP spec/features<cr>
-map <leader>gR :CtrlP spec/requests<cr>
-map <leader>gM :CtrlP spec/models<cr>
-map <leader>gA :CtrlP spec/requests/api<cr>
-map <leader>gi :CtrlP lib/global_admin<cr>
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" let g:ctrlp_custom_ignore = {
+            " \ 'dir':  '\v[\/]\.(git|hg|svn)$
+            " \ |(Desktop|Libary|Music|Movies|Pictures|cassettes|log|tmp)',
+            " \ 'file': '\v\.(jpg|png|gif|psd|jpeg
+            " \ |exe|so|o|dat|dmg|nib|xib|bat|egg|cer|DS_Store|pkg
+            " \ |tar|bz|gz|zip|rar|iso|cdr|bz2
+            " \ |mp3|mp4|mov|avi|flv|torrent|wmv
+            " \ |pdf|epub|mobi|chm|doc|docx|lit|gdoc)$'
+            " \ }
+
+" Sane Ignore For ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+  \ 'file': '\.exe$\|\.so$\|\.dat$|\.png$'
+  \ }
+
+map <leader>gv :CtrlPClearCache<cr>:CtrlP app/views<cr>
+map <leader>gf :CtrlPClearCache<cr>:CtrlP %%<cr>
+map <leader>gv :CtrlPClearCache<cr>:CtrlP app/views<cr>
+map <leader>gc :CtrlPClearCache<cr>:CtrlP app/controllers<cr>
+map <leader>gm :CtrlPClearCache<cr>:CtrlP app/models<cr>
+map <leader>gh :CtrlPClearCache<cr>:CtrlP app/helpers<cr>
+map <leader>gl :CtrlPClearCache<cr>:CtrlP lib<cr>
+map <leader>gs :CtrlPClearCache<cr>:CtrlP app/assets/stylesheets<cr>
+map <leader>gj :CtrlPClearCache<cr>:CtrlP app/assets/javascripts<cr>
+map <leader>ga :CtrlPClearCache<cr>:CtrlP app/controllers/api<cr>
+map <leader>gF :CtrlPClearCache<cr>:CtrlP spec/features<cr>
+map <leader>gR :CtrlPClearCache<cr>:CtrlP spec/requests<cr>
+map <leader>gM :CtrlPClearCache<cr>:CtrlP spec/models<cr>
+map <leader>gA :CtrlPClearCache<cr>:CtrlP spec/requests/api<cr>
 
 map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
@@ -244,16 +261,6 @@ function! ShowRoutes()
 endfunction
 " map <leader>gR :call ShowRoutes()<cr>
 
-
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/]\.(git|hg|svn)$
-            \ |(Desktop|Libary|Music|Movies|Pictures|cassettes|log|tmp)',
-            \ 'file': '\v\.(jpg|png|gif|psd|jpeg
-            \ |exe|so|o|dat|dmg|nib|xib|bat|egg|cer|DS_Store|pkg
-            \ |tar|bz|gz|zip|rar|iso|cdr|bz2
-            \ |mp3|mp4|mov|avi|flv|torrent|wmv
-            \ |pdf|epub|mobi|chm|doc|docx|lit|gdoc)$'
-            \ }
 
 " Set up vim-test
 nmap <silent> <leader>r :TestFile<CR>
