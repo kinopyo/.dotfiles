@@ -69,6 +69,7 @@ alias gsp="git stash pop"
 alias gsu="git stash -u"
 alias gsh="git stash"
 alias gac="git add .; git commit"
+alias gclean="git clean --force -d -e storage"
 alias t="tig"
 
 # editor
@@ -97,8 +98,11 @@ alias rdmt="RAILS_ENV=test rake db:migrate"
 # heroku
 alias hlog="heroku logs --tail"
 alias hrc="heroku run rails console"
-alias hpush="git push heroku master"
+alias hp="git push heroku master"
+alias hpc="git push heroku $(current_branch):master"
 alias hrdm="heroku run rake db:migrate"
+
+alias grs1="git reset --soft HEAD~1; git reset"
 
 # https://github.com/rupa/z, for fast navigation
 . ~/bin/z.sh
