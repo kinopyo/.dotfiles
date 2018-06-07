@@ -3,7 +3,7 @@
 ### Mac
 
 - Install [janus](https://github.com/carlhuda/janus): `curl -L https://bit.ly/janus-bootstrap | bash`
-- `brew install ag tmux`
+- `brew install postgresql tmux reattach-to-user-namespace ag`
 
 ### Ubuntu(nitrous.io)
 
