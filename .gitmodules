@@ -37,9 +37,6 @@
 [submodule ".janus/tmux-yank"]
 	path = .janus/tmux-yank
 	url = https://github.com/tmux-plugins/tmux-yank
-[submodule "vim-auto-save"]
-	path = vim-auto-save
-	url = git@github.com:vim-scripts/vim-auto-save.git
 [submodule "/Users/qihuan-piao/.dotfiles/.janus/plugin"]
 	path = /Users/qihuan-piao/.dotfiles/.janus/plugin
 	url = git@github.com:tpope/vim-rhubarb.git
@@ -52,3 +49,6 @@
 [submodule ".janus/vim-bracketed-paste"]
 	path = .janus/vim-bracketed-paste
 	url = git@github.com:ConradIrwin/vim-bracketed-paste.git
+[submodule ".janus/vim-auto-save"]
+	path = .janus/vim-auto-save
+	url = git@github.com:vim-scripts/vim-auto-save.git
