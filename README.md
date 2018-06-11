@@ -3,7 +3,7 @@
 ### Mac
 
 - Install [janus](https://github.com/carlhuda/janus): `curl -L https://bit.ly/janus-bootstrap | bash`
-- `brew install vim tmux reattach-to-user-namespace ag postgresql`
+- `brew install vim tmux reattach-to-user-namespace ag postgresql heroku/brew/heroku`
 
 ### Ubuntu(nitrous.io)
 
