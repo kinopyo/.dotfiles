@@ -346,8 +346,6 @@ map <Leader>w :call <SID>StripTrailingWhitespaces()<cr>
 
 " Disable SCSS linting (too slow and often wrong)
 let g:syntastic_scss_checkers=[]
-" indent private methods
-let g:ruby_indent_access_modifier_style="indent"
 
 " refresh changed content
 " set autoread
