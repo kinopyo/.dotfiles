@@ -3,7 +3,7 @@
 ### Mac
 
 - Install [janus](https://github.com/carlhuda/janus): `curl -L https://bit.ly/janus-bootstrap | bash`
-- `brew install vim tmux reattach-to-user-namespace ag postgresql heroku/brew/heroku`
+- `brew install vim tmux reattach-to-user-namespace ag postgresql heroku/brew/heroku percol`
 - Configure iTerm2 to allow copy to clipboard ([source](https://github.com/tmux-plugins/tmux-yank#macos))
 
 ### Ubuntu(nitrous.io)
