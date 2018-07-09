@@ -94,6 +94,9 @@ set winwidth=84
 " set textwidth=80
 set formatoptions+=t
 set colorcolumn=100
+" highlight the 121st character
+highlight CrossedLineIndicator ctermbg=magenta
+call matchadd('CrossedLineIndicator', '\%121v', 100)
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
