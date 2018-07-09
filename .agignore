@@ -1,8 +1,6 @@
 *.swp
 tmp
 log
-doc
-docs
 coverage
 cassettes
 data
